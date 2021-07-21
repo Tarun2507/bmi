@@ -1,0 +1,61 @@
+<html>
+    <body>
+        <div style="display: flex;flex:1;flex-direction :column;justify-content: center;align-items: center;">
+            <label for="fname">Enter name</label>
+            <input type="text" id="name" name="num1"><br/><br/>
+            <label for="fname">Enter weight</label>
+            <input type="number" id="num1" name="num1"><br/><br/>
+            <label for="fname">Enter height</label>
+            <input type="number" id="num2" name="num1"><br><br>
+            <button onclick="calculateBMI()">calculate bmi</button> <br> <br>
+            <label for="fname">Your BMI is </label>
+            <input type="number" id="num3" name="num1"><br><br>
+            <p id="msg"></p>
+    <br><br>
+    <label>Result</label> 
+    <input type="number" id="result" name="result">
+    </div>
+    </div>
+    </body>
+</html>
+<script>
+    function calculateBMI() {
+        var msg;
+        var weight = document.getElementById('num1').value;
+        var height = document.getElementById('num2').value;
+        var calcheight = height * height;
+        var bmi = weight/calcheight;
+        if(bmi < 18.5) {
+            msg = "You should a little bit more"
+        }
+        if(bmi >= 18.5 && bmi <=24.9) {
+            msg="keep doing what you are doing"
+        }
+        if(bmi>=25 && bmi <=29) {
+            msg = "You should cut down "
+        }
+        if(bmi>=30) {
+            msg = "You are obese, need to do something asap"
+        }
+        document.getElementById('num3').value = bmi
+        document.getElementById('msg').innerHTML = msg
+        var jdata = {
+          "weight" : parseInt(weight),
+          "height" : parseInt(height),
+          "bmi"    : parseInt(bmi),
+          "name"   : document.getElementById('name').value,
+            "msg" : msg
+      } 
+// level is key and levelVal is value
+var xhttp = new XMLHttpRequest();
+xhttp.open("POST", "http://localhost:5000/bodymass/add", true);
+xhttp.setRequestHeader('Content-Type', 'application/json');
+xhttp.send(JSON.stringify(jdata));
+
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText);
+    }
+}
+    }
+</script>

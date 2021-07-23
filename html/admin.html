@@ -1,0 +1,38 @@
+<html>
+    <div style="display: flex;flex-direction: column;">
+        <div>all users :</div>
+        <div id="users"></div>
+    </div>
+</html>
+<script>
+    allUsers();
+    function allUsers() 
+    {
+        var xhr = new XMLHttpRequest();
+xhr.open("GET", "http://localhost:5000/bodymass", true);
+xhr.onload = function (e) {
+  if (xhr.readyState === 4) {
+    if (xhr.status === 200) {
+      console.log(xhr.responseText);
+      var response = JSON.parse(xhr.responseText);
+      createUsers(xhr.responseText)
+    } else {
+      console.error(xhr.statusText);
+    }
+  }
+};
+xhr.onerror = function (e) {
+  console.error(xhr.statusText);
+};
+xhr.send(null);
+    }
+    function createUsers(response) {
+      for(i=0;i<response;i++) {
+     var ul= document.createElement('ul')
+      var li = document.createElement('li')
+      li.innerHTML = resonse[i].name
+      ul.appendChild('li');
+      localStorage.setItem('userdata',resonse)
+      }
+    }
+</script>

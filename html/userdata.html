@@ -1,0 +1,20 @@
+<html>
+    <table>
+
+    </table>
+</html>
+<script>
+    function populateUserData() {
+        userdata = localStorage.get('userdata')
+        for(i=0;i<userdata.length;i++) {
+            var td = document.createElement('td')
+        var tr = document.createElement('tr')
+            tr.appendChild('td')
+            td.innerHTML = userdata[i].name
+            td.innerHTML = userdata[i].bmi
+            td.innerHTML = userdata[i].weight
+            td.innerHTML = userdata[i].msg
+            td.innerHTML = userdata[i].height
+        }
+    }
+</script>
